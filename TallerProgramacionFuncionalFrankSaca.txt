@@ -1,0 +1,43 @@
+Por: Frank Saca
+
+scala> val lista = List((72,115),(76,121),(78,125),(81,130),(89,141),(95,150),
+     |                  (108,165),(115,170),(120,177),(130,178))
+lista: List[(Int, Int)] = List((72,115), (76,121), (78,125), (81,130), (89,141), (95,150), (108,165), (115,170), (120,177), (130,178))
+
+scala> def x(tabla: List[(Int, Int)]) = tabla.map(x => x._1).sum.toFloat / tabla.length
+x: (tabla: List[(Int, Int)])Float
+
+scala> def y(tabla: List[(Int, Int)]) = tabla.map(x => x._2).sum.toFloat / tabla.length
+y: (tabla: List[(Int, Int)])Float
+
+scala> def dtmx(tabla: List[(Int, Int)]) = math.sqrt(tabla.map(x => math.pow(x._1,2)).sum / tabla.length - math.pow(x(tabla),2))
+dtmx: (tabla: List[(Int, Int)])Double
+
+scala> def dtmy(tabla: List[(Int, Int)]) = math.sqrt(tabla.map(x => math.pow(x._2,2)).sum / tabla.length - math.pow(y(
+tabla),2))
+dtmy: (tabla: List[(Int, Int)])Double
+
+scala> def covarianza(tabla: List[(Int, Int)]) = tabla.map(x => x._1 * x._2).sum.toDouble / tabla.length - (x(tabla) *
+ y(tabla))
+covarianza: (tabla: List[(Int, Int)])Double
+
+scala> def coeficiente(tabla: List[(Int, Int)]) = covarianza(tabla) / (dtmx(tabla) * dtmy(tabla))
+coeficiente: (tabla: List[(Int, Int)])Double
+
+scala> x(lista)
+res16: Float = 96.4
+
+scala> y(lista)
+res17: Float = 147.2
+
+scala> dtmx(lista)
+res18: Double = 19.520238364593414
+
+scala> dtmy(lista)
+res19: Double = 22.8727107802615
+
+scala> covarianza(lista)
+res20: Double = 440.419921875
+
+scala> coeficiente(lista)
+res21: Double = 0.9864252952082142
